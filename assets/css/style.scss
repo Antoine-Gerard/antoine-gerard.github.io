@@ -157,25 +157,25 @@ header {
     margin-top: 25px;
     margin-left: -15px;
 }
-
-a {
-    background: $primary;
-    color: $text;
-    padding: 8px 20px;
-    text-transform: uppercase;
-    font-size: 14px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    display: inline-block;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px -1px rgba(0, 0, 0, .6);
-
-    &:hover, &:active, &:focus {
-	background: darken($primary, 10%);
+.timeline{
+    a {
+	background: $primary;
 	color: $text;
-	text-decoration: none;
-    }
+	padding: 8px 20px;
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	display: inline-block;
+	border-radius: 2px;
+	box-shadow: 0 1px 3px -1px rgba(0, 0, 0, .6);
 
+	&:hover, &:active, &:focus {
+	    background: darken($primary, 10%);
+	    color: $text;
+	    text-decoration: none;
+	}
+    }
 }
 
 .timeline-card {
@@ -287,4 +287,20 @@ blockquote {
 	}
     }
     
+}
+
+.GoTo
+{
+    a {
+	background: $primary;
+	color: $text;
+	padding: 15px 40px;
+	text-transform: uppercase;
+	font-size: 18px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	display: inline-block;
+	border-radius: 2px;
+	box-shadow: 0 1px 3px -1px rgba(0, 0, 0, .6);
+    }
 }
