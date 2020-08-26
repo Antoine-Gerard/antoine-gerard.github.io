@@ -6,5 +6,6 @@ install:
   - gem install mercenary -v 0.3.6
   - gem install jekyll html-proofer
        
-script: 
+script:
+  - "bundle install"
   - "bundle exec jekyll build"
