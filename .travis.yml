@@ -1,4 +1,11 @@
 language: ruby
 rvm:
-  - 2.3
-script: "bundle exec jekyll build"
+  - 2.7
+install: 
+  - gem install bundler --version '2.1.4'
+  - gem install mercenary -v 0.3.6
+  - gem install jekyll html-proofer
+       
+script:
+  - "bundle install"
+  - "bundle exec jekyll build"
