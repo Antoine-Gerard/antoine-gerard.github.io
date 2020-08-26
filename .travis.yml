@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.3
+  - 2.4
 install: 
   - gem install bundler --version '2.1.4'
   - gem install mercenary -v 0.3.6
