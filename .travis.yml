@@ -3,6 +3,7 @@ rvm:
   - 2.3
 install: 
   - gem install bundler --version '2.1.4'
+  - gem install mercenary -v 0.3.6
   - gem install jekyll html-proofer
        
 script: 
