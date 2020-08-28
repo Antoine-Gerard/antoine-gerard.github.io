@@ -4,6 +4,33 @@ title: "Développement"
 permalink: /dev/
 ---
 
+# Nemo
+
+Voir la [page de Nemo](https://team.inria.fr/memphis/nemo/)
+
+Nemo est un outil de simulation numérique destiné à la modélisation de problèmes
+en mécanique des fluides. Le but de Nemo est de permettre à l'équipe
+[Memphis](https://team.inria.fr/memphis/) de disposer d'un socle commun pour la
+simulation de problèmes de CFD. 
+
+## Contributions dans Nemo:
+
+* Implémentation de méthodes d'interpolation
+* Calculs de gradient à l'aide d'une méthode volume finis
+* Test de mise à l'échelle sur un cluster de calcul local
+  [Plafrim](https://www.plafrim.fr/). 
+  
+## Dépendances de Nemo
+
+**Langage: C++**
+
+* [CMake](https://cmake.org/download/)
+* [Open MPI](https://www.open-mpi.org/)
+* [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page)
+* [PETSc](https://www.mcs.anl.gov/petsc/download/index.html)
+* [Bitpit](http://optimad.github.io/bitpit/)
+* [googletest](https://github.com/google/googletest)
+
 # CEPS (Cardiac ElectroPhysiology Simulator)
 
 Voir la [page de CEPS](https://carmen.gitlabpages.inria.fr/ceps/)
@@ -24,7 +51,7 @@ nouveaux modèles physiques.
 	  
 ## Dépendances de CEPS:
 
-**Language: C++**
+**Langage: C++**
 
 * [CMake](https://cmake.org/download/)
 * [Open MPI](https://www.open-mpi.org/)
