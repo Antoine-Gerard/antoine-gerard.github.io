@@ -153,7 +153,7 @@ possibles entre les 3 indices de lignes et de colonnes).
 
 Avant d'aller plus loin dans le développement de notre jeu de morpion, faisons
 une petite introduction aux concepts de l'apprentissage par renforcement. Tout
-d'abord introduisons un peu de vocabulaire: 
+d'abord, introduisons un peu de vocabulaire: 
 
 * **Agent**: L'apprenant et le preneur de décision. Pour notre exemple, l'agent
 sera un joueur de morpion. 
@@ -178,14 +178,14 @@ succés rencontrés (les **récompenses**).
 ## Exploitation versus Exploration:
 
 Pour expliquer la différence entre **exploitation** et **exploration**, prenons
-l'exemple suivant: vous avez décidé d'aller boire une bière avec un.e ami.e après le
+l'exemple suivant: vous avez décidé d'aller boire une bière avec un·e ami·e après le
 travail, et vous cherchez un bar. D'habitude, vous allez dans un bar vendant de
 très bonnes bières belges, et vous savez qu'il existe une superbe ambiance dans
-ce bar. Cependant, cette fois, votre ami.e vous signifie l'existence d'un
+ce bar. Cependant, cette fois, votre ami·e vous signifie l'existence d'un
 nouveau bar venant d'ouvrir au coin de la rue, et ce bar est bien noté sur
-l'Internet. Aucun d'entre vous n'arrive à se décider: devez vous aller dans
-votre bar habituel où vous ne serez pas déçu.e, ou devez vous aller dans ce
-nouveau bar qui pourrait être mieux, ou alors vous décevoir. 
+l'Internet. Aucun d'entre vous n'arrive à se décider: devez-vous aller dans
+votre bar habituel où vous ne serez pas déçu·e ? Ou devez-vous aller dans ce
+nouveau bar qui pourrait être mieux ? Ou alors vous décevoir. 
 
 Dans l'apprentissage par renforcemment, ce dilemme est connu sous le nom de
 **compromis exploration-exploitation**. À quel moment devez vous choisir
@@ -197,6 +197,56 @@ compromis **exploration-exploitation** de la manière suivante:
 
 1. Exploration (action choisie au hasard) avec une probabilité $\epsilon$
 2. Exploitation ("meilleure" action) le reste du temps. 
+
+## Apprentissage par différence temporelle
+
+Dans cette partie nous allons discuter de l'algorithme utilisé pour apprendre à
+notre agent de jouer au morpion: l'apprentissage par **différence
+temporelle**. Dans l'apprentissage par différence temporelle nous allons
+estimer la **fonction valeur** $V$ sans s'appuyer sur un modèle, mais sur une
+phase d'expérimentation constituée d'un grand nombre d'expériences. Si nous
+revenons à notre jeu de morpion, nous allons jouer un grand nombre de partie, et
+estimer la fonction valeur relativement aux victoires et défaites rencontrées
+par notre agent. 
+
+Il est assez facile d'imaginer qu'au départ notre agent n'a aucune connaissance
+des déplacements optimaux. La fonction valeur est initialisée en utilisant des
+valeurs aléatoires, ou alors avec des valeurs nulles. Les seules entrées connues
+de la fonction valeur seront celles des états finaux, et seront les
+**récompenses** attribuées. Pour le jeu de morpion, nous procéderons de la
+manière suivante:
+
+* $V(s) = 0$ pour tout état non visité. 
+* {% raw %}
+  $$
+  V(s_f) 
+  = \begin{cases}
+  1 \text{ si partie gagnée} \\
+  -1 \text{ si partie perdue} \\
+  0.1 \text{ si partie nulle}
+  \end{cases} 
+  $$
+  {% endraw %}
+  où $s_f$ est un état finale (partie finie).
+  
+**Mise à jour de la fonction valeur:**
+
+La mise à jour de la fonction valeur se fera alors de la manière suivante: 
+
+{% raw %}
+$$
+V(s_t) = V(s_t) + \alpha \left( V(s_{t+1}) - V(s_t) \right)
+$$
+{% endraw %}
+
+Cette mise à jour se fera avec une méthode de **rétropropagation**, c'est-à-dire
+que nous partirons de l'état finale pour revenir à l'état initial. Pour notre
+jeu de morpion, nous attendrons d'avoir une partie finie pour rétropropager les
+valeurs de la fonction valeur. Pour pouvoir obtenir une fonction valeur
+"cohérente", il faudra alors répéter notre expérience jusqu'à l'état final un
+grand nombre de fois, et ce pour avoir un maximum d'états et de transitions
+connus. 
+
 
 Voici alors le code pour la définition de l'agent (`MorpionPlayer.py`): 
 
@@ -221,17 +271,13 @@ class MorpionPlayer():
         self.draw = 0
         
         self.eps = 0.99
-        self.greedy_move = 0
-        self.move = 0
         self.trainable = trainable
 
     def reset_stat(self):
         self.win = 0
         self.lose = 0
         self.draw = 0
-        self.move = 0
-        self.greedy_move = 0
-        
+                
     @staticmethod
     def hash_board(board):
         symbol_to_val = {'-': 0, 'x':1, 'o':2}
@@ -297,3 +343,84 @@ class MorpionPlayer():
 
         self.history = []
 ```
+
+**Fonction `__init__`:**
+
+Initialisation de l'agent. Dans cette méthode, les trois paramètres d'entrées
+sont:
+
+* `is_human`: Le joueur est-il une personne réelle ou une IA.
+* `player`: Entier permettant de définir le joueur: 1 ou 2
+* `trainable`: Est-ce que l'on souhaite entraîner l'agent ? 
+
+L'attribut `history` nous permettra de garder en mémoire l'historique de la
+partie, c'est-à-dire les états par lesquels est passé notre agent lors de la
+partie en cours. `V` est un dictionnaire permettant de stocker les valeurs de la
+fonction valeur. Les attributs `win`, `lose`, et `draw` nous permettront de
+stocker les nombres de victoires, défaites et nulles de l'agent. Enfin, `eps`
+est la valeur initiale de $\epsilon$ pour l'algorithme $\epsilon$-greedy (ce qui
+permettra de faire le compromis entre exploration et exploitation). Au départ,
+$\epsilon$ est volontairement grand, puisque nous allons préférer faire de
+l'exploration (l'agent ne connait encore rien des gestes optimaux), mais plus
+nous jouerons de partie, plus nous diminuerons $\epsilon$ pour privilégier
+l'exploitation. 
+
+**`reset_stat`:**
+
+Remise à zéros des attributs servant à stocker les statistiques de victoires. 
+
+**`hash_board`:**
+
+Méthode statique définissant une fonction de hachage pour les états (différentes
+disposition des plateaux de jeu). Cette fonction permet d'associer une valeur
+numérique à une certaine disposition de plateau. Pour décrire l'action de cette
+fonction de hachage, prenons l'exemple du plateau suivant: 
+
+{: style="text-align:center"}
+![plateau](../assets/images/plateau.jpg)
+
+Nous allons alors réaliser les étapes suivantes:
+
+1. Mise à plat du plateau. Dans l'exemple choisi, nous aurons alors la liste
+   ```python
+	   ['x', 'o', 'o','-','x','o','x','o','x']
+   ```
+2. Encodage des symboles en utilisant le dictionnaire `{'-': 0, 'x':1,
+   'o':2}`. Pour notre exemple, cela donne:
+   ```python
+	   ['1', '2', '2','0','1','2','1','2','1']
+   ```
+   On peut alors voir cette liste comme la représentation en base 3 d'un
+   entier. 
+3. Conversion en base 10. Pour notre exemple cela nous donne le nombre
+{% raw %}
+$$
+1 * 3^0 + 2 * 3^1 + 2 * 3^2 + 0 * 3^3 + 1 * 3^4 + 2 * 3^5 + 1 * 3^6 + 2 * 3^7 +
+1 * 3^8 = 12256
+$$
+{% endraw %}
+
+Ainsi, le plateau donné en exemple sera encodé avec l'entier 12256
+
+**`greedy_step`:**
+
+Méthode définissant l'étape **d'exploitation** c'est-à-dire le choix par l'agent
+de l'action optimale. Afin de faire ce choix, nous cherchons parmis l'ensemble des
+actions disponibles l'action maximisant la fonction valeur (récompense
+espérée maximale). 
+
+**`play`**:
+
+Méthode permettant à l'agent de jouer son tour dans la partie. Le compromis
+exploration-exploitation est alors géré grâce à $\epsilon$ puisque l'agent
+jouera de la manière suivante:
+
+* Exploration (choix d'une action aléatoire) si nous tirons un nombre réelle
+  inférieur à epsilon. Le tirage est effectué à l'aide d'une loi uniforme
+  continue sur l'intervalle $[0,1]$. Ainsi la probabilité que l'agent choisisse
+  d'explorer sera égale à $\epsilon$. 
+* Exploitation (choix du mouvement "optimal") sinon. Ainsi, l'agent choisira de
+  faire de l'exploitation avec une probabilité de 1-$\epsilon$. 
+
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Antoine-Gerard/Projets/master)
