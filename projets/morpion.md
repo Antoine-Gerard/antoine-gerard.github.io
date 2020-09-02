@@ -20,7 +20,7 @@ nous allons diviser la tâche en quatre parties:
 
 1. Définition du jeu
 2. Définition d'un **agent** (joueur de morpion)
-3. Entrainement de deux agents jouant l'un contre l'autre
+3. Entraînement de deux agents jouant l'un contre l'autre
 4. Évaluation des résultats
 
 # 1. Définition du jeu de morpion
@@ -173,7 +173,7 @@ l'agent peut espérer de mieux en moyenne s'il choisit cet état.
 
 Le but de l'apprentissage par renforcement est d'apprendre par l'expérience une
 stratégie "comportementale" (la **politique**) en fonctions des échecs et des
-succés rencontrés (les **récompenses**). 
+succès rencontrés (les **récompenses**). 
 
 ## Exploitation versus Exploration:
 
@@ -187,7 +187,7 @@ l'Internet. Aucun d'entre vous n'arrive à se décider: devez-vous aller dans
 votre bar habituel où vous ne serez pas déçu·e ? Ou devez-vous aller dans ce
 nouveau bar qui pourrait être mieux ? Ou alors vous décevoir. 
 
-Dans l'apprentissage par renforcemment, ce dilemme est connu sous le nom de
+Dans l'apprentissage par renforcement, ce dilemme est connu sous le nom de
 **compromis exploration-exploitation**. À quel moment devez vous choisir
 **d'exploiter** une action qui vous semble la meilleure option plutôt que
 **d'explorer** des actions pouvant être meilleures ou pire. Il existe un
@@ -239,9 +239,9 @@ V(s_t) = V(s_t) + \alpha \left( V(s_{t+1}) - V(s_t) \right)
 $$
 {% endraw %}
 
-Cette mise à jour se fera avec une méthode de **rétropropagation**, c'est-à-dire
+Cette mise à jour se fera avec une méthode de **rétro-propagation**, c'est-à-dire
 que nous partirons de l'état finale pour revenir à l'état initial. Pour notre
-jeu de morpion, nous attendrons d'avoir une partie finie pour rétropropager les
+jeu de morpion, nous attendrons d'avoir une partie finie pour rétro-propager les
 valeurs de la fonction valeur. Pour pouvoir obtenir une fonction valeur
 "cohérente", il faudra alors répéter notre expérience jusqu'à l'état final un
 grand nombre de fois, et ce pour avoir un maximum d'états et de transitions
@@ -361,7 +361,7 @@ stocker les nombres de victoires, défaites et nulles de l'agent. Enfin, `eps`
 est la valeur initiale de $\epsilon$ pour l'algorithme $\epsilon$-greedy (ce qui
 permettra de faire le compromis entre exploration et exploitation). Au départ,
 $\epsilon$ est volontairement grand, puisque nous allons préférer faire de
-l'exploration (l'agent ne connait encore rien des gestes optimaux), mais plus
+l'exploration (l'agent ne connaît encore rien des gestes optimaux), mais plus
 nous jouerons de partie, plus nous diminuerons $\epsilon$ pour privilégier
 l'exploitation. 
 
@@ -405,7 +405,7 @@ Ainsi, le plateau donné en exemple sera encodé avec l'entier 12256
 **`greedy_step`:**
 
 Méthode définissant l'étape **d'exploitation** c'est-à-dire le choix par l'agent
-de l'action optimale. Afin de faire ce choix, nous cherchons parmis l'ensemble des
+de l'action optimale. Afin de faire ce choix, nous cherchons parmi l'ensemble des
 actions disponibles l'action maximisant la fonction valeur (récompense
 espérée maximale). 
 
@@ -422,5 +422,7 @@ jouera de la manière suivante:
 * Exploitation (choix du mouvement "optimal") sinon. Ainsi, l'agent choisira de
   faire de l'exploitation avec une probabilité de 1-$\epsilon$. 
 
+Suite en cours de construction
+{: .alert .alert-warning}
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Antoine-Gerard/Projets/master)
