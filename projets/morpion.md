@@ -422,16 +422,11 @@ jouera de la manière suivante:
 * Exploitation (choix du mouvement "optimal") sinon. Ainsi, l'agent choisira de
   faire de l'exploitation avec une probabilité de 1-$\epsilon$. 
 
-**Suite en cours de construction**
-{: .alert .alert-warning}
+# Entraînement et évaluation des résultats. 
 
-
+Pour cette section, nous invitons le lecteur à essayer le `notebook` jupyter en
+cliquant sur le bouton ci-dessous:
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Antoine-Gerard/Projets/master)
 
-<style>
-.alert-warning {
-  color: rgb(138,109,59) !important;
-}
-</style>
 
