@@ -430,3 +430,10 @@ cliquant sur le bouton ci-dessous:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Antoine-Gerard/Projets/master)
 
 
+Une fois le serveur jupyter lancé, suivre les étapes suivantes:
+
+1. Cliquer sur RL
+2. Cliquer sur Morpion.ipynb
+3. Amusez vous avec le notebook
+
+Les sources sont disponibles sur ma page [GitHub](https://github.com/Antoine-Gerard/Projets)
