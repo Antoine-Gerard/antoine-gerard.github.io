@@ -16,7 +16,7 @@ description: "PhD, modélisation mathématique, intelligence artificielle"
 * A. Gérard, Modèles numériques personnalisés de la fibrillation auriculaire,
   Ph.D. thesis, Université de Bordeaux, Juillet 2019. Disponible [ici](https://tel.archives-ouvertes.fr/tel-02297510)
 
-## Article: 
+## Article:
 
 * A. Gérard, A. Collin, G. Bureau, P. Moireau, and Y. Coudière, Model assessment
 through data assimilation of realistic data in cardiac electrophysiology, in
@@ -39,7 +39,7 @@ June 2019. Disponible [ici](https://hal.inria.fr/hal-02172102)
 * A. Gérard, A. Collin, J. Bayer, A. Frontera, P. Moireau, and Y. Coudière, Front
   observer for data assimilation of electroanatomical mapping data for a
   numerical atrial model, Liryc Workshop, 2016, Poster. Disponible
-  [ici](https://hal.inria.fr/hal-01400776) 
+  [ici](https://hal.inria.fr/hal-01400776)
 
 ## Projets et séjours de recherche:
 
@@ -48,7 +48,7 @@ June 2019. Disponible [ici](https://hal.inria.fr/hal-02172102)
   Marseille-Luminy, 2016, Projet. Disponible [ici](http://smai.emath.fr/cemracs/cemracs16/Projects/Presentations/Session2/4_presentationPhySio.pdf)
 
 * **Université d’Ottawa Mai 2017, 2 semaines:**
-  
+
   Travail avec le professeur
   [Y. Bourgault](https://mysite.science.uottawa.ca/ybourg/personal.html) sur des
   méthodes d’estimations de paramètres variationnelles. Analyse de sensibilités
@@ -65,11 +65,11 @@ June 2019. Disponible [ici](https://hal.inria.fr/hal-02172102)
 * **Fête de la science**
 
 	* 2016, Inria, Bordeaux:
-	
+
       Animation d’un atelier de présentation du serious game
-	  [heart-attack](http://heart-attack.fr/) pour des lycéens. 
-  
+	  [heart-attack](http://heart-attack.fr/) pour des lycéens.
+
 	* 2015, Inria, Bordeaux:
-	
+
 	  Animation d’un atelier d’initiation à la programmation avec Python pour
-      des collégiens. 
+      des collégiens.
