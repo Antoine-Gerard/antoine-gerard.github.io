@@ -8,6 +8,10 @@ permalink: /projets/dataquitaine
 
 ![wia](/assets/images/winespace.png){:width="180"}
 
+## Télécharger la présentation
+
+PDF: [télécharger](/pdf/Dataquitaine.pdf)
+
 ## Résumé
 
 ### Introduction
