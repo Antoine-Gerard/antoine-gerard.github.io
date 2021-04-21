@@ -30,3 +30,5 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
 
 gem "jekyll-commonmark-ghpages", "~> 0.1.6"
+
+gem "bootstrap-sass", "~> 3.4"
